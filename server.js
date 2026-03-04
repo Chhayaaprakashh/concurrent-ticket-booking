@@ -5,7 +5,9 @@ const app = express();
 app.use(express.json());
 
 // ✅ Redis client
-const client = createClient();
+const client = createClient({
+  url: process.env.REDIS_URL || "redis://localhost:6379"
+});
 client.on("error", err => console.log("Redis error:", err));
 
 await client.connect();
